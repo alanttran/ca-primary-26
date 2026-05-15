@@ -2,11 +2,11 @@ import type { BallotMeta, BallotCategory } from '../types/ballot-types';
 
 export const BALLOT_META: BallotMeta = {
   siteTitle: 'Unofficial 2026 California primary voter guide',
-  lastContentUpdated: 'May 10, 2026',
+  lastContentUpdated: 'May 14, 2026',
   scopeZip: '92126',
   scopeLabel: 'Mira Mesa, San Diego',
   verificationNote:
-    'Modeled on the ballot described for ZIP 92126 in the companion research document. After Prop 50 (2025) boundary shifts, some addresses may differ—confirm contests on your official sample ballot at sdvote.com.',
+    'We built this from the companion research ballot for this ZIP. After Prop 50 (2025) redistricting, a few addresses see a slightly different lineup than before—if a race looks unfamiliar, trust your official sample ballot over us.',
 };
 
 export const BALLOT_CATEGORIES: BallotCategory[] = [

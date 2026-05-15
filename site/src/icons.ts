@@ -54,6 +54,61 @@ export function iconFlag(className = 'icon icon--nav'): SVGElement {
   );
 }
 
+/** Triangular warning flag; pair with `.icon--red-flag` for color. */
+export function iconRedFlag(className = 'icon icon--red-flag'): SVGElement {
+  return svgIcon(
+    '0 0 24 24',
+    '<path fill="currentColor" d="M5 21h2.5V3H5v18z"/><path fill="currentColor" d="M7.5 5.5L18 11l-10.5 5.5V5.5z"/>',
+    className,
+  );
+}
+
+/**
+ * Minimal party glyphs (donkey, elephant, etc.). Paths from Material Design Icons
+ * (Pictogrammers) — Apache License 2.0 — https://pictogrammers.com/docs/general/license/
+ */
+export function partyGlyphIcon(party: string, className = 'party-mark__svg'): SVGElement {
+  const p = party.trim();
+  switch (p) {
+    case 'D':
+      return svgIcon(
+        '0 0 24 24',
+        '<path fill="currentColor" d="M21.34,10.35L21.27,10.28L21.18,10.19L18,7V6A0.5,0.5 0 0,0 17.5,5.5C17.36,5.5 17.22,5.56 17.13,5.66L13.46,9H7C6.32,9 5.69,9.35 5.32,9.92L2.62,12.59C2.29,13.04 2.39,13.66 2.84,14C3.18,14.24 3.65,14.25 4,14L5,13.07V19H8V15H13V19H16V13.83C16,13.3 16.21,12.79 16.59,12.42L18,11L20,12V12C20.15,12.08 20.32,12.13 20.5,12.13C21.1,12.11 21.59,11.61 21.58,11C21.57,10.76 21.5,10.53 21.34,10.35Z"/>',
+        className,
+      );
+    case 'R':
+      return svgIcon(
+        '0 0 24 24',
+        '<path fill="currentColor" d="M19.5,15.5A0.5,0.5 0 0,1 19,16A0.5,0.5 0 0,1 18.5,15.5V8.5C18.5,6.57 16.43,5 14.5,5H6A4,4 0 0,0 2,9V19H6V15H11V19H15V14.5A0.5,0.5 0 0,1 15.5,14A0.5,0.5 0 0,1 16,14.5V16A3,3 0 0,0 19,19A3,3 0 0,0 22,16V14H19.5V15.5Z"/>',
+        className,
+      );
+    case 'Green':
+      return svgIcon(
+        '0 0 24 24',
+        '<path fill="currentColor" d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>',
+        className,
+      );
+    case 'PF':
+      return svgIcon(
+        '0 0 24 24',
+        '<path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,14.41V19.93C9.58,19.75 8.23,19.19 7.1,18.31L11,14.41M13,14.41L16.9,18.31C15.77,19.19 14.42,19.75 13,19.93V14.41M4,12C4,7.97 7,4.57 11,4.07V11.59L5.69,16.9C4.59,15.5 4,13.78 4,12M18.31,16.9L13,11.59V4.07C17,4.57 20,7.97 20,12C20,13.78 19.41,15.5 18.31,16.9Z"/>',
+        className,
+      );
+    case 'L':
+      return svgIcon(
+        '0 0 24 24',
+        '<path fill="currentColor" d="M8.6 9.6C9 10.2 9.5 10.7 10.2 11H14.2C14.5 10.9 14.7 10.7 14.9 10.5C15.9 9.5 16.3 8 15.8 6.7L15.7 6.5C15.6 6.2 15.4 6 15.2 5.8C15.1 5.6 14.9 5.5 14.8 5.3C14.4 5 14 4.7 13.6 4.3C12.7 3.4 12.6 2 13.1 1C12.6 1.1 12.1 1.4 11.7 1.8C10.2 3 9.6 5.1 10.3 7V7.2C10.3 7.3 10.2 7.4 10.1 7.5C10 7.6 9.8 7.5 9.7 7.4L9.6 7.3C9 6.5 8.9 5.3 9.3 4.3C8.4 5.1 7.9 6.4 8 7.7C8 8 8.1 8.3 8.2 8.6C8.2 8.9 8.4 9.3 8.6 9.6M12.3 8.1C12.4 7.6 12.2 7.2 12.1 6.8C12 6.4 12 6 12.2 5.6L12.5 6.2C12.9 6.8 13.6 7 13.8 7.8V8.1C13.8 8.6 13.6 9.1 13.3 9.4C13.1 9.5 12.9 9.7 12.7 9.7C12.1 9.9 11.4 9.6 11 9.2C11.8 9.2 12.2 8.6 12.3 8.1M15 12V14H14L13 22H11L10 14H9V12H15Z"/>',
+        className,
+      );
+    default:
+      return svgIcon(
+        '0 0 24 24',
+        '<path fill="currentColor" d="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z"/>',
+        className,
+      );
+  }
+}
+
 export function iconGavel(className = 'icon icon--nav'): SVGElement {
   return svgIcon(
     '0 0 24 24',
@@ -122,55 +177,63 @@ export function typologyChip(code: TypologyCode, opts?: { title?: string }): HTM
   return span;
 }
 
-/** Confidence: high — three solid bars. */
+/** Confidence: high — filled circle (●). */
 export function iconConfidenceHigh(className = 'icon-confidence icon-confidence--high'): SVGElement {
   return svgIcon(
     '0 0 16 16',
-    '<rect x="2" y="3" width="2.75" height="10" rx="0.5" fill="currentColor"/><rect x="6.625" y="3" width="2.75" height="10" rx="0.5" fill="currentColor"/><rect x="11.25" y="3" width="2.75" height="10" rx="0.5" fill="currentColor"/>',
+    '<circle cx="8" cy="8" r="5.5" fill="currentColor"/>',
     className,
   );
 }
 
-/** Confidence: medium — strong + mid + mid bars. */
+/** Confidence: medium — half-filled circle (◐): filled wedge under a single full ring so stroke weight matches low/skip. */
 export function iconConfidenceMed(className = 'icon-confidence icon-confidence--med'): SVGElement {
   return svgIcon(
     '0 0 16 16',
-    '<rect x="2" y="4" width="2.75" height="9" rx="0.5" fill="currentColor"/><rect x="6.625" y="6" width="2.75" height="7" rx="0.5" fill="currentColor"/><rect x="11.25" y="7" width="2.75" height="6" rx="0.5" fill="currentColor"/>',
+    '<path fill="currentColor" d="M8 8L8 2.65A5.35 5.35 0 0 0 8 13.35Z"/><circle cx="8" cy="8" r="5.35" fill="none" stroke="currentColor" stroke-width="1.5"/>',
     className,
   );
 }
 
-/** Confidence: low — one tall bar + two short stubs. */
+/** Confidence: low — open circle (○). */
 export function iconConfidenceLow(className = 'icon-confidence icon-confidence--low'): SVGElement {
   return svgIcon(
     '0 0 16 16',
-    '<rect x="2" y="6" width="2.75" height="7" rx="0.5" fill="currentColor"/><rect x="6.625" y="11" width="2.75" height="2" rx="0.5" fill="currentColor"/><rect x="11.25" y="11" width="2.75" height="2" rx="0.5" fill="currentColor"/>',
+    '<circle cx="8" cy="8" r="5.35" fill="none" stroke="currentColor" stroke-width="1.5"/>',
     className,
   );
 }
 
-/** Confidence / skip — flat line (no pick). */
+/** Confidence / skip — circle with horizontal bar (—). */
 export function iconConfidenceSkip(className = 'icon-confidence icon-confidence--skip'): SVGElement {
   return svgIcon(
     '0 0 16 16',
-    '<rect x="2" y="7" width="12" height="2" rx="0.5" fill="currentColor"/>',
+    '<circle cx="8" cy="8" r="5.35" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="3.75" y1="8" x2="12.25" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
     className,
   );
 }
 
-export function confidenceIconFromChar(
-  c: string,
-  className = 'icon-confidence',
-): SVGElement | null {
-  switch (c) {
+function confidenceIconClass(base: string, ch: string): string | null {
+  const c = ch.trim();
+  const tier =
+    c === '●' ? 'high' : c === '◐' ? 'med' : c === '○' ? 'low' : c === '—' ? 'skip' : null;
+  if (!tier) return null;
+  return `${base} ${base}--${tier}`;
+}
+
+export function confidenceIconFromChar(c: string, baseClass = 'icon-confidence'): SVGElement | null {
+  const ch = c.trim() === '\u2014' ? '—' : c.trim();
+  const cls = confidenceIconClass(baseClass, ch);
+  if (!cls) return null;
+  switch (ch) {
     case '●':
-      return iconConfidenceHigh(className);
+      return iconConfidenceHigh(cls);
     case '◐':
-      return iconConfidenceMed(className);
+      return iconConfidenceMed(cls);
     case '○':
-      return iconConfidenceLow(className);
+      return iconConfidenceLow(cls);
     case '—':
-      return iconConfidenceSkip(className);
+      return iconConfidenceSkip(cls);
     default:
       return null;
   }
