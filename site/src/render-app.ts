@@ -9,11 +9,14 @@ import type {
   TypologyCode,
 } from './types/ballot-types';
 import { CONFIDENCE_LEVEL_ROWS, NO_PICK_TOKEN } from './data/confidence-levels';
-import { BALLOT_CATEGORIES, BALLOT_META } from './data/meta';
-import { mergeRaceDerivedFields } from './data/merge-races';
-import { RACES_REST } from './data/races-rest';
-import { RACES_STATEWIDE } from './data/races-statewide';
-import { TLDR_ROWS } from './data/tldr-data';
+import { BALLOT_ZIP_OPTIONS } from './data/ballot-profiles';
+import { buildBallotData } from './data/build-ballot-data';
+import { BALLOT_META } from './data/meta';
+import {
+  earlierSiteUpdateBuilds,
+  siteUpdateBuildForDate,
+  type SiteUpdatePanel,
+} from './data/site-updates';
 import { TYPOLOGIES } from './data/typologies-data';
 import {
   categoryIcon,
@@ -33,13 +36,8 @@ import {
 } from './icons.ts';
 import { parsePickCell } from './parse-pick-cell.ts';
 
-export const ballotData: BallotData = {
-  meta: BALLOT_META,
-  typologies: TYPOLOGIES,
-  categories: BALLOT_CATEGORIES,
-  tldrRows: TLDR_ROWS,
-  races: mergeRaceDerivedFields([...RACES_STATEWIDE, ...RACES_REST]),
-};
+/** Default San Diego ballot (92126); use `buildBallotData` for other ZIPs. */
+export const ballotData: BallotData = buildBallotData(BALLOT_META.scopeZip);
 
 const TY_CODES: TypologyCode[] = ['PL', 'EL', 'DM', 'OL', 'SS', 'AR', 'PR', 'CC', 'FF'];
 
@@ -255,58 +253,103 @@ function appendCandidateNoteLine(li: HTMLLIElement, note: string): void {
   if (last < note.length) li.append(document.createTextNode(note.slice(last)));
 }
 
+function renderSiteUpdatePanel(panel: SiteUpdatePanel): HTMLElement {
+  const d = el('details', 'site-updates__panel');
+  const s = el('summary', 'site-updates__panel-summary');
+  s.textContent = panel.summary;
+  d.append(s);
+  if (panel.body) {
+    const p = el('p', 'site-updates__panel-body');
+    p.textContent = panel.body;
+    d.append(p);
+  }
+  if (panel.bullets?.length) {
+    const ul = el('ul', 'site-updates__panel-list');
+    for (const t of panel.bullets) {
+      const li = el('li');
+      li.textContent = t;
+      ul.append(li);
+    }
+    d.append(ul);
+  }
+  return d;
+}
+
+function appendSiteUpdateBuildPanels(stack: HTMLElement, panels: SiteUpdatePanel[]): void {
+  for (const panel of panels) {
+    stack.append(renderSiteUpdatePanel(panel));
+  }
+}
+
 /**
  * Collapsible “what changed” note for the current content refresh (progressive disclosure).
  */
 function renderSiteUpdatesSection(lastContentUpdated: string): HTMLElement {
+  const current = siteUpdateBuildForDate(lastContentUpdated);
+  const earlier = earlierSiteUpdateBuilds(lastContentUpdated);
+
   const outer = el('details', 'site-updates', { id: 'site-updates' });
   const sum = el('summary', 'site-updates__summary');
   sum.textContent = `${lastContentUpdated} — what changed in this build`;
   const lede = el('p', 'site-updates__lede');
-  lede.textContent =
-    'A focused editorial and UX pass: judicial job lines, official portraits where campaigns publish them, and tighter mobile behavior for wide tables. Open a topic for specifics.';
+  lede.textContent = current.lede;
 
   const stack = el('div', 'site-updates__stack');
+  appendSiteUpdateBuildPanels(stack, current.panels);
 
-  const dTitles = el('details', 'site-updates__panel');
-  const sTitles = el('summary', 'site-updates__panel-summary');
-  sTitles.textContent = 'San Diego Superior Court — current titles on each judge line';
-  const pTitles = el('p', 'site-updates__panel-body');
-  pTitles.textContent =
-    'Role blurbs now match day-job titles instead of generic “Candidate” / “Unopposed” where we had a clear source: chief deputy city attorney (Ramirez), civil litigator (Gallo), chief deputy district attorney (Prior, unopposed), assistant chief deputy district attorney (Hauf, unopposed), Superior Court commissioner (Boucek, unopposed), senior deputy attorney general (Cleesattle), administrative law judge with civil-litigation background (Noakes), and estate & family law attorney plus law-school clinical director (D’Ambrogi).';
-  dTitles.append(sTitles, pTitles);
-
-  const dPhotos = el('details', 'site-updates__panel');
-  const sPhotos = el('summary', 'site-updates__panel-summary');
-  sPhotos.textContent = 'Campaign headshots in candidate tiles';
-  const pPhotos = el('p', 'site-updates__panel-body');
-  pPhotos.textContent =
-    'Merged-in portrait URLs were refreshed for a long list of races (San Diego judicial primaries, county and city contests, and several statewide nonpartisan lines) so tiles favor each campaign’s primary photo asset when the host allows embedding. If a remote image fails in your browser, it is usually hotlink protection on that host—not a broken build.';
-  dPhotos.append(sPhotos, pPhotos);
-
-  const dLayout = el('details', 'site-updates__panel');
-  const sLayout = el('summary', 'site-updates__panel-summary');
-  sLayout.textContent = 'Layout, tables, and notes on phones';
-  const ulLayout = el('ul', 'site-updates__panel-list');
-  const layoutItems = [
-    'Dropped the old fixed minimum page width so the guide reflows on narrow viewports.',
-    'Wrapped wide typology and scorecard tables in horizontal scroll regions so you can pan without squashing text.',
-    'Viewport meta uses safe-area insets for notched phones; candidate notes automatically link bare https:// URLs.',
-  ];
-  for (const t of layoutItems) {
-    const li = el('li');
-    li.textContent = t;
-    ulLayout.append(li);
+  if (earlier.length > 0) {
+    const dEarlier = el('details', 'site-updates__panel site-updates__panel--archive');
+    const sEarlier = el('summary', 'site-updates__panel-summary');
+    sEarlier.textContent = 'Earlier builds';
+    const archiveStack = el('div', 'site-updates__archive-stack');
+    for (const build of earlier) {
+      const dBuild = el('details', 'site-updates__panel site-updates__panel--nested');
+      const sBuild = el('summary', 'site-updates__panel-summary');
+      sBuild.textContent = build.dateLabel;
+      const pBuild = el('p', 'site-updates__panel-body');
+      pBuild.textContent = build.lede;
+      dBuild.append(sBuild, pBuild);
+      appendSiteUpdateBuildPanels(dBuild, build.panels);
+      archiveStack.append(dBuild);
+    }
+    dEarlier.append(sEarlier, archiveStack);
+    stack.append(dEarlier);
   }
-  dLayout.append(sLayout, ulLayout);
 
-  stack.append(dTitles, dPhotos, dLayout);
   outer.append(sum, lede, stack);
   return outer;
 }
 
-export function renderApp(root: HTMLElement, data: BallotData): void {
+function renderZipSelector(currentZip: string, appRoot: HTMLElement): HTMLElement {
+  const wrap = el('div', 'zip-select');
+  const label = el('label', 'zip-select__label', { for: 'ballot-zip' });
+  label.textContent = 'Ballot ZIP';
+  const select = el('select', 'zip-select__control', {
+    id: 'ballot-zip',
+    name: 'zip',
+    'aria-label': 'Choose ballot ZIP code',
+  }) as HTMLSelectElement;
+  for (const opt of BALLOT_ZIP_OPTIONS) {
+    const option = document.createElement('option');
+    option.value = opt.zip;
+    option.textContent = opt.label;
+    if (opt.zip === currentZip) option.selected = true;
+    select.append(option);
+  }
+  select.addEventListener('change', () => {
+    const url = new URL(location.href);
+    url.searchParams.set('zip', select.value);
+    history.pushState({}, '', url);
+    renderApp(appRoot, select.value);
+  });
+  wrap.append(label, select);
+  return wrap;
+}
+
+export function renderApp(root: HTMLElement, zip: string): void {
+  const data = buildBallotData(zip);
   root.replaceChildren();
+  document.title = `Unofficial 2026 CA primary guide — ZIP ${data.meta.scopeZip} (${data.meta.scopeLabel})`;
 
   const banner = el('aside', 'scope-banner', { role: 'note' });
   banner.append(
@@ -321,7 +364,7 @@ export function renderApp(root: HTMLElement, data: BallotData): void {
     document.createTextNode(
       ` once so the nine columns map to you; the blurbs stay short on purpose—contrast, not completeness. Officials: `,
     ),
-    extLink('https://www.sdvote.com', 'San Diego County sample ballot', true),
+    extLink(data.meta.registrarUrl, data.meta.registrarLabel, true),
     document.createTextNode(' · '),
     extLink('https://www.sos.ca.gov/elections', 'CA Secretary of State', true),
     document.createTextNode(
@@ -338,7 +381,7 @@ export function renderApp(root: HTMLElement, data: BallotData): void {
   brand.append(brandIcon, h1);
   const sub = el('p', 'site-header__subtitle');
   sub.textContent = `June 2, 2026 California primary · ZIP ${data.meta.scopeZip} ballot · unofficial independent research — not the government, not legal advice.`;
-  header.append(brand, sub, banner, renderSiteUpdatesSection(data.meta.lastContentUpdated));
+  header.append(brand, sub, renderZipSelector(zip, root), banner, renderSiteUpdatesSection(data.meta.lastContentUpdated));
 
   const nav = el('nav', 'toc-nav', { 'aria-label': 'On this page' });
   const tocTitle = el('h2', 'toc-nav__title');

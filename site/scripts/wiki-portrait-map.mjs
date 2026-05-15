@@ -27,6 +27,11 @@ export const WIKI_BY_CANDIDATE_ID = {
   muratsuchi: 'Al_Muratsuchi',
   anderson: 'Joel_Anderson',
   lee: 'Kent_Lee_(politician)',
+  kiley: 'Kevin_Kiley_(politician)',
+  pan: 'Richard_Pan',
+  niello: 'Roger_Niello',
+  grove: 'Shannon_Grove',
+  patterson: 'Joe_Patterson_(California_politician)',
 };
 
 export function wikiSummaryUrl(title) {

@@ -217,4 +217,48 @@ export const CANDIDATE_EXTRAS: Partial<Record<string, Pick<Candidate, 'campaignU
     headshotUrl:
       'https://static.wixstatic.com/media/f5fb35_610c014263db4a3a8272e0266d48a007~mv2.png/v1/crop/x_599,y_0,w_1394,h_2000/fill/w_678,h_973,fp_0.50_0.50,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/laurie_hauf_judge.png',
   },
+  kiley: { campaignUrl: 'https://www.kevinkiley.com/' },
+  ho: {
+    campaignUrl: 'https://www.thienhoca.com/',
+    headshotUrl:
+      'https://run.imgix.net/eaa25bfc-99cf-41c4-a5ed-99ead52f388c/a413af45-79f1-4dcc-9463-81d2fc3afc82/a413af45-79f1-4dcc-9463-81d2fc3afc82.png?ixlib=js-3.8.0&rect=0%2C0%2C1080%2C1080&w=384&q=85',
+  },
+  pan: { campaignUrl: 'https://www.drpanforcongress.com/' },
+  tomlinson: {
+    campaignUrl: 'https://www.lbtforcongress.com/',
+    headshotUrl:
+      'https://run.imgix.net/332da686-f5e1-4020-bf1e-f9c299399394/35b37102-77a3-4c9d-adff-b9186d2ac8bf/35b37102-77a3-4c9d-adff-b9186d2ac8bf.png?ixlib=js-3.8.0&rect=0%2C0%2C3000%2C3000&w=384&q=85',
+  },
+  niello: {
+    campaignUrl: 'https://www.rogerniello.com/',
+    headshotUrl: 'https://rogerniello.com/wp-content/uploads/Roger-Niello-Portrait2.jpg',
+  },
+  frame: {
+    campaignUrl: 'https://www.seanframe.com/',
+    headshotUrl:
+      'https://images.squarespace-cdn.com/content/v1/647b72c7c764774e007801a6/d3f05cfc-d342-4065-926c-5fb4158a3bd3/Sean-Frame-Portraits-%2883%29.jpg?format=750w',
+  },
+  patterson: { campaignUrl: 'https://ad05.asmrc.org/' },
+  parker: {
+    campaignUrl: 'https://www.nevaparkerforassembly.com/',
+    headshotUrl:
+      'https://static.wixstatic.com/media/3fa230_d7d05e0889ba419293c5ef7ba28f9471~mv2.jpg/v1/fill/w_750,h_750,al_c,q_85,usm_0.66_1.00_0.01/3fa230_d7d05e0889ba419293c5ef7ba28f9471~mv2.jpg',
+  },
+  bass: {
+    campaignUrl: 'https://www.bassforjudge.com/',
+    headshotUrl: 'https://content.campaignpartner.net/images/151190/Bass_LE_Choices_Website_Bannerv3.png',
+  },
+  esparza: {
+    campaignUrl: 'https://nelsonesparza.com/',
+    headshotUrl:
+      'https://static.wixstatic.com/media/a37828_aa74f7389a4b4847bb6b2d4fe37f3a87~mv2.jpg/v1/fill/w_750,h_750,al_c,q_85/a37828_aa74f7389a4b4847bb6b2d4fe37f3a87~mv2.jpg',
+  },
+  dixson: {
+    headshotUrl:
+      'https://content.app-sources.com/s/530765346606659851/uploads/Judge_Images/DIXSON2026-30_web4_cropped-1980926.jpg?format=webp',
+  },
+  'garbolino-mojica': {
+    headshotUrl:
+      'https://i0.wp.com/www.zocalopublicsquare.org/wp-content/uploads/2017/02/Gayle-Garbolino-Mojica-by-Beth-Baugher-e1487381040827.jpg?fit=800%2C800&ssl=1',
+  },
 };

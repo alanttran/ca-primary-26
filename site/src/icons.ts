@@ -160,6 +160,7 @@ export function categoryIcon(categoryId: string): SVGElement {
     case 'statewide-nonpartisan':
       return iconEducation();
     case 'local-sd':
+    case 'local-placer':
       return iconMapPin();
     case 'measures':
       return iconClipboard();

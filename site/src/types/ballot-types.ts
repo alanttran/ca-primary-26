@@ -123,6 +123,8 @@ export interface BallotMeta {
   scopeZip: string;
   scopeLabel: string;
   verificationNote: string;
+  registrarLabel: string;
+  registrarUrl: string;
 }
 
 export interface BallotData {
