@@ -161,6 +161,9 @@ export function categoryIcon(categoryId: string): SVGElement {
       return iconEducation();
     case 'local-sd':
     case 'local-placer':
+    case 'local-orange':
+    case 'local-rivco':
+    case 'local-la':
       return iconMapPin();
     case 'measures':
       return iconClipboard();

@@ -1,0 +1,8 @@
+# Add ballot ZIP
+
+When the user asks to add a new sample-ballot ZIP or extend regional ballot coverage:
+
+1. Read and follow `.cursor/skills/add-ballot-zip/SKILL.md` (92126 quality bar).
+2. Follow `.cursor/skills/site-build-changelog/SKILL.md` for `site-updates.ts` and `meta.ts`.
+
+Do not ship a new ZIP with bio-only candidates—contested races need topical `scorecard` rows like `assembly-ad78` in `races-rest.ts`.

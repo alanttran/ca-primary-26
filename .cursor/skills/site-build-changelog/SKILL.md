@@ -57,6 +57,10 @@ When you materially change the voter guide site (`site/src/**`), update the publ
 - Mention file areas only when useful for maintainers (`races-placer.ts`, URL `?zip=`).
 - Prior builds stay in the array; older entries move under **Earlier builds** in the UI.
 
+## New ZIP ballots
+
+When adding a ZIP (not just editing an existing one), read `.cursor/skills/add-ballot-zip/SKILL.md` first.
+
 ## Candidate portraits (when adding or fixing photos)
 
 | Source | Files |

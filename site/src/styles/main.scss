@@ -14,16 +14,21 @@
   --rad-max-width: 72rem;
   --rad-radius: 10px;
 
-  /* Pew columns — saturated for chips on white */
-  --typ-PL: #0284c7;
-  --typ-EL: #2563eb;
-  --typ-DM: #0891b2;
-  --typ-OL: #0d9488;
-  --typ-SS: #7c3aed;
-  --typ-AR: #db2777;
-  --typ-PR: #ea580c;
-  --typ-CC: #dc2626;
-  --typ-FF: #b91c1c;
+  /* Pew columns — PL→FF as a linear blue→red ramp (OKLCH mix); chips match spectrum */
+  --typ-spectrum-blue: oklch(0.52 0.19 264);
+  --typ-spectrum-red: oklch(0.52 0.19 32);
+  --typ-PL: var(--typ-spectrum-blue);
+  --typ-EL: color-mix(in oklch, var(--typ-spectrum-blue) 87.5%, var(--typ-spectrum-red) 12.5%);
+  --typ-DM: color-mix(in oklch, var(--typ-spectrum-blue) 75%, var(--typ-spectrum-red) 25%);
+  --typ-OL: color-mix(in oklch, var(--typ-spectrum-blue) 62.5%, var(--typ-spectrum-red) 37.5%);
+  --typ-SS: color-mix(in oklch, var(--typ-spectrum-blue) 50%, var(--typ-spectrum-red) 50%);
+  --typ-AR: color-mix(in oklch, var(--typ-spectrum-blue) 37.5%, var(--typ-spectrum-red) 62.5%);
+  --typ-PR: color-mix(in oklch, var(--typ-spectrum-blue) 25%, var(--typ-spectrum-red) 75%);
+  --typ-CC: color-mix(in oklch, var(--typ-spectrum-blue) 12.5%, var(--typ-spectrum-red) 87.5%);
+  --typ-FF: var(--typ-spectrum-red);
+
+  /* Pre-spectrum typology OL (teal) — “what’s at stake” callout background tint */
+  --rad-stakes-surface-tint: #0d9488;
 
   /* Confidence icon colors */
   --conf-high: #047857;
@@ -200,13 +205,13 @@ body {
   background: linear-gradient(
     90deg,
     var(--typ-PL) 0%,
-    var(--typ-EL) 14%,
-    var(--typ-DM) 28%,
-    var(--typ-OL) 42%,
+    var(--typ-EL) 12.5%,
+    var(--typ-DM) 25%,
+    var(--typ-OL) 37.5%,
     var(--typ-SS) 50%,
-    var(--typ-AR) 58%,
-    var(--typ-PR) 72%,
-    var(--typ-CC) 86%,
+    var(--typ-AR) 62.5%,
+    var(--typ-PR) 75%,
+    var(--typ-CC) 87.5%,
     var(--typ-FF) 100%
   );
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--rad-text) 12%, transparent);
@@ -932,15 +937,15 @@ main {
     border-radius: 2px;
     background: linear-gradient(
       90deg,
-      var(--typ-PL),
-      var(--typ-EL),
-      var(--typ-DM),
-      var(--typ-OL),
-      var(--typ-SS),
-      var(--typ-AR),
-      var(--typ-PR),
-      var(--typ-CC),
-      var(--typ-FF)
+      var(--typ-PL) 0%,
+      var(--typ-EL) 12.5%,
+      var(--typ-DM) 25%,
+      var(--typ-OL) 37.5%,
+      var(--typ-SS) 50%,
+      var(--typ-AR) 62.5%,
+      var(--typ-PR) 75%,
+      var(--typ-CC) 87.5%,
+      var(--typ-FF) 100%
     );
   }
 }
@@ -1015,7 +1020,7 @@ main {
 .race__stakes {
   margin: 0 0 0.85rem;
   padding: 0.65rem 0.85rem;
-  background: color-mix(in srgb, var(--typ-OL) 8%, var(--rad-surface));
+  background: color-mix(in srgb, var(--rad-stakes-surface-tint) 8%, var(--rad-surface));
   border-left: 3px solid var(--rad-accent);
   border-radius: 0 var(--rad-radius) var(--rad-radius) 0;
   color: var(--rad-text);
@@ -1124,6 +1129,11 @@ main {
 
 .party-mark--d {
   color: #2563eb;
+
+  .party-mark__svg {
+    width: 1.36rem;
+    height: 1.36rem;
+  }
 }
 
 .party-mark--r {
@@ -1177,6 +1187,28 @@ main {
   }
 }
 
+.candidate-card__record-vs-change {
+  margin: 0.65rem 0 0.35rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--rad-border);
+  background: var(--rad-surface-elevated, rgba(255, 255, 255, 0.04));
+}
+
+.candidate-card__record-vs-change-heading {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--rad-text);
+}
+
+.candidate-card__record-vs-change-text {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--rad-text-muted);
+}
+
 .candidate-card__sub {
   margin: 0.75rem 0 0.35rem;
   font-size: 0.95rem;
@@ -1185,6 +1217,16 @@ main {
 .candidate-card__meta {
   font-size: 0.9rem;
   color: var(--rad-text-muted);
+}
+
+.candidate-card__meta--polling .link-external {
+  display: inline-flex;
+  vertical-align: baseline;
+  margin-left: 0.15rem;
+}
+
+.candidate-card__meta--under-role {
+  margin: 0 0 0.5rem;
 }
 
 .candidate-card__flags {

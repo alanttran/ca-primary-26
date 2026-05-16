@@ -2,7 +2,7 @@
 export const WIKI_BY_CANDIDATE_ID = {
   becerra: 'Xavier_Becerra',
   porter: 'Katie_Porter',
-  villaraigosa: 'Antonio_Villaraigosa',
+  mahan: 'Matt_Mahan',
   steyer: 'Tom_Steyer',
   hilton: 'Steve_Hilton',
   bianco: 'Chad_Bianco',
@@ -32,6 +32,22 @@ export const WIKI_BY_CANDIDATE_ID = {
   niello: 'Roger_Niello',
   grove: 'Shannon_Grove',
   patterson: 'Joe_Patterson_(California_politician)',
+  friedman: 'Laura_Friedman',
+  menjivar: 'Caroline_Menjivar',
+  gipson: 'Mike_Gipson',
+  'villaraigosa-sheriff': 'Alex_Villanueva',
+  calvert: 'Ken_Calvert',
+  'young-kim': 'Young_Kim',
+  seyarto: 'Kelly_Seyarto',
+  'sanchez-kate': 'Kate_Sanchez',
+  vargas: 'Juan_Vargas',
+  'padilla-steve': 'Steve_Padilla',
+  'aisha-wahab': 'Aisha_Wahab',
+  'liz-ortega': 'Liz_Ortega',
+  'sally-lieber': 'Sally_Lieber',
+  'carl-demaio': 'Carl_DeMaio',
+  'sam-liccardo': 'Sam_Liccardo',
+  'patrick-ahrens-ad26': 'Patrick_Ahrens',
 };
 
 export function wikiSummaryUrl(title) {

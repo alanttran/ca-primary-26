@@ -234,6 +234,8 @@ export const RACES_REST: Race[] = [
           },
         ],
         redFlags: [],
+        recordVsChange:
+          'Peters brings seven terms of Energy & Commerce seniority, ACA-centric health work, and a pragmatic blue-district record. Swapping for Mitra trades committee clout for sharper climate and tenant-protection signaling; Arnous is mostly outsider symbolism; Huntington is the real ideological flip to the Republican column.',
       },
       {
         id: 'arnous',
@@ -622,6 +624,8 @@ export const RACES_REST: Race[] = [
           },
         ],
         redFlags: [],
+        recordVsChange:
+          'Ward pairs AB 2097–style housing supply moves with a mainstream Democratic voting record and strong endorsements in a coastal seat. Galvez is the conventional Republican contrast; Salguero is a libertarian protest—neither matches Ward’s bill history unless you deliberately want to reject that policy stack.',
       },
       {
         id: 'galvez',
@@ -1123,6 +1127,8 @@ export const RACES_REST: Race[] = [
         ],
         endorsements: 'Rep. Juan Vargas, Supervisors Lawson-Remer / Aguirre / Montgomery Steppe (appointers), community leaders.',
         redFlags: [],
+        recordVsChange:
+          'Cohen is a fresh appointee with House financial-policy experience and the supervisors who picked him. Anderson offers elected experience and anti-fee populism but would vacate a Board seat; Nakawatase is the purer GOP-line treasurer alternative without that vacancy trade.',
       },
       {
         id: 'anderson',
@@ -1232,6 +1238,8 @@ export const RACES_REST: Race[] = [
         endorsements:
           'SD County Democratic Party, SD & Imperial Counties Labor Council, MEA, AFSCME 127, SDPOA, SD Firefighters 145, SD Lifeguards, SEIU 221, Planned Parenthood Action Fund, BIA, numerous state/federal endorsements.',
         redFlags: [],
+        recordVsChange:
+          'Lee already chairs Land Use & Housing and holds Council President Pro Tem leverage—101 Ash, community plans, and fee-backed growth are his résumé. Powell is the pocketbook and lean-government counter; change buys slower fee-driven growth and different mobility priorities only if that trade beats keeping Lee’s coalition and gavel.',
       },
       {
         id: 'powell',

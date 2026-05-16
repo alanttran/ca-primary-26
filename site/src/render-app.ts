@@ -528,6 +528,13 @@ function renderMethodologySection(): HTMLElement {
   pScore.textContent =
     'Where a scorecard appears, leading symbols compress the stance: ✓✓ strong support, ✓ support, ✗ oppose, ~ mixed or context-dependent, ? unclear from available sources. Text after the icon carries the nuance. When a second muted line appears under a cell, it contrasts that stance with the termed-out incumbent, the sitting officeholder, or other leading candidates in the same primary.';
 
+  const hRecord = el('h3', 'methodology__subhead');
+  hRecord.textContent = '“Record vs. change” on incumbent cards';
+
+  const pRecord = el('p', 'methodology__text');
+  pRecord.textContent =
+    'When a sitting officeholder faces opposition in the primary, some cards add a short “Record vs. change” note after the bio. It is not a second scorecard—just a plain-language read on what they have delivered in the role and when replacing them is likely worth losing seniority, committee fit, or institutional momentum. We omit it for single-candidate races and for lines labeled unopposed.';
+
   const hRed = el('h3', 'methodology__subhead');
   hRed.textContent = 'Red flags and picks';
 
@@ -559,7 +566,7 @@ function renderMethodologySection(): HTMLElement {
     ),
   );
 
-  sec.append(h2, lead, hCross, pCross, hConf, ulConf, hScore, pScore, hRed, pRed, hPew, pPew);
+  sec.append(h2, lead, hCross, pCross, hConf, ulConf, hScore, pScore, hRecord, pRecord, hRed, pRed, hPew, pPew);
   return sec;
 }
 
@@ -676,8 +683,9 @@ function renderRace(race: Race): HTMLElement {
   if (race.kind === 'measure' && race.measure) {
     body.append(renderMeasure(race.measure));
   } else {
+    const n = race.candidates.length;
     for (const c of race.candidates) {
-      body.append(renderCandidate(c));
+      body.append(renderCandidate(c, n));
     }
   }
 
@@ -818,6 +826,24 @@ function appendRedFlagListItem(li: HTMLLIElement, bullet: RedFlagBullet): void {
   li.append(srcWrap);
 }
 
+/** Sitting incumbent on the ballot (excludes “unopposed” commissioner lines). */
+function isSittingIncumbentRole(role: string): boolean {
+  const r = role.toLowerCase();
+  if (r.includes('unopposed')) return false;
+  return r.includes('incumbent');
+}
+
+/**
+ * “Record vs. change” blurb: only in multi-candidate races, only for roles that read as incumbent,
+ * and only when copy exists.
+ */
+function shouldShowRecordVsChange(c: Candidate, raceCandidateCount: number): boolean {
+  const text = c.recordVsChange?.trim();
+  if (!text) return false;
+  if (raceCandidateCount <= 1) return false;
+  return isSittingIncumbentRole(c.role);
+}
+
 /** Accessible label for `party` codes in ballot data. */
 function partyMarkAriaLabel(party: string): string {
   switch (party.trim()) {
@@ -863,7 +889,7 @@ function partyMarkElement(party: string): HTMLElement {
   return span;
 }
 
-function renderCandidate(c: Candidate): HTMLElement {
+function renderCandidate(c: Candidate, raceCandidateCount: number): HTMLElement {
   const card = el('article', 'candidate-card');
   if (c.redFlagCallout || (c.redFlags?.length ?? 0) > 0) card.classList.add('candidate-card--alert');
 
@@ -919,11 +945,40 @@ function renderCandidate(c: Candidate): HTMLElement {
   } else {
     role.textContent = c.role;
   }
-  text.append(h3, role);
+  text.append(h3);
+  text.append(role);
+  if (c.recentPolling) {
+    const pol = c.recentPolling;
+    const pp = el('p', 'candidate-card__meta candidate-card__meta--polling candidate-card__meta--under-role');
+    const head = el('strong');
+    head.textContent = 'Recent polling: ';
+    pp.append(head);
+    pp.append(
+      document.createTextNode(
+        `${escapeHtml(pol.firstChoiceDisplay)} first-choice support · ${escapeHtml(pol.contestLabel)} · ${escapeHtml(pol.pollsterCredit)} (${escapeHtml(pol.fieldDatesLabel)}). `,
+      ),
+    );
+    pp.append(extLink(pol.sourceUrl, 'Poll release', true));
+    if (pol.fullResultsUrl) {
+      pp.append(document.createTextNode(' · '));
+      pp.append(extLink(pol.fullResultsUrl, 'Full results spreadsheet', true));
+    }
+    text.append(pp);
+  }
   for (const para of c.bio) {
     const p = el('p');
     p.textContent = para;
     text.append(p);
+  }
+  if (shouldShowRecordVsChange(c, raceCandidateCount)) {
+    const box = el('aside', 'candidate-card__record-vs-change');
+    box.setAttribute('aria-label', 'Record versus change');
+    const rh = el('h4', 'candidate-card__record-vs-change-heading');
+    rh.textContent = 'Record vs. change';
+    const rp = el('p', 'candidate-card__record-vs-change-text');
+    rp.textContent = c.recordVsChange ?? '';
+    box.append(rh, rp);
+    text.append(box);
   }
   if (c.scorecard?.length) {
     const hs = el('h4', 'candidate-card__sub');

@@ -130,6 +130,8 @@ export const RACES_PLACER: Race[] = [
           },
         ],
         redFlags: [],
+        recordVsChange:
+          'Kiley is the sitting House member in an R-leaning seat after his no-party-preference pivot and still carries center-right fiscal instincts. Keep him for Appropriations-era seniority and split-ticket stability; vote Democratic if flipping the seat matters more than his specific committee posture—none of the challengers inherit his tenure if they win.',
       },
       {
         id: 'ho',
@@ -301,6 +303,8 @@ export const RACES_PLACER: Race[] = [
           },
         ],
         redFlags: [],
+        recordVsChange:
+          'Niello is the sitting Republican senator with business and prior Assembly experience plus a large war chest in purple suburbs. Frame is the credible Democratic alternative on housing and schools—worth the party switch only if moving the seat matters more than Niello’s fiscal-restraint floor votes for your household.',
       },
       {
         id: 'frame',
@@ -401,6 +405,8 @@ export const RACES_PLACER: Race[] = [
           },
         ],
         redFlags: [],
+        recordVsChange:
+          'Patterson is the defending Assembly Republican after a tight 2024 win with strong fundraising and a local-control housing brand. Parker is the state-party-backed rematch—change buys labor-aligned schools and affordability messaging but trades Patterson’s mandate-skeptical posture if she can actually flip the seat.',
       },
       {
         id: 'parker',
@@ -480,6 +486,8 @@ export const RACES_PLACER: Race[] = [
           },
         ],
         redFlags: [],
+        recordVsChange:
+          'Dixson is the appointed judge with civil-rights and legal-aid roots and endorsements from sitting Placer judges. Bass is the prosecutor-mayor challenger pitching victims’ rights—choose him if you want a harder enforcement temperament on the bench; stay with Dixson if civil-side balance and appointee continuity matter more.',
       },
       {
         id: 'bass',

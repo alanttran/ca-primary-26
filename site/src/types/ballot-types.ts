@@ -37,6 +37,22 @@ export type RedFlagBullet =
       sources?: RedFlagSource[];
     };
 
+/** One cited horserace snapshot for a candidate profile (manually maintained; must link to source). */
+export interface CandidateHorseRacePoll {
+  /** Vote share as published by the pollster (e.g. `"19%"`). */
+  firstChoiceDisplay: string;
+  /** Short contest phrase (e.g. California governor primary). */
+  contestLabel: string;
+  /** Pollster attribution line as you want it shown to readers. */
+  pollsterCredit: string;
+  /** Human-readable dates or release timing (not parsed). */
+  fieldDatesLabel: string;
+  /** HTTPS URL to the pollster’s write-up or methodology page. */
+  sourceUrl: string;
+  /** Optional link to primary tabulations (e.g. publisher spreadsheet export). */
+  fullResultsUrl?: string;
+}
+
 export interface Candidate {
   id: string;
   name: string;
@@ -52,10 +68,19 @@ export interface Candidate {
   scorecard?: ScorecardRow[];
   money?: string;
   endorsements?: string;
+  /** Optional independent horserace number with citation (shown under endorsements). */
+  recentPolling?: CandidateHorseRacePoll;
   /** Serious caveats voters may weigh heavily (shown under “Red flags” with a flag icon). */
   redFlags?: RedFlagBullet[];
   /** FYI context—background or perspective, not the same weight as red flags (shown under “Notes”). */
   notes?: string[];
+  /**
+   * For sitting officeholders in contested primaries: one short paragraph on what they have
+   * actually delivered in the role and when replacing them is (or is not) likely worth losing
+   * seniority, committee fit, or institutional momentum. Shown only when the race has more than
+   * one candidate and the role reads as an incumbent (not “unopposed”).
+   */
+  recordVsChange?: string;
   /** Highlight the whole card when red-flag severity is especially high. */
   redFlagCallout?: boolean;
 }

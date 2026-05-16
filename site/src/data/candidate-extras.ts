@@ -4,7 +4,7 @@ import type { Candidate } from '../types/ballot-types';
 export const CANDIDATE_EXTRAS: Partial<Record<string, Pick<Candidate, 'campaignUrl' | 'headshotUrl'>>> = {
   becerra: { campaignUrl: 'https://www.xavierbecerra2026.com/' },
   porter: { campaignUrl: 'https://katieporter.com/' },
-  villaraigosa: { campaignUrl: 'https://www.antonio2026.com/' },
+  mahan: { campaignUrl: 'https://www.mahanforcalifornia.com/' },
   steyer: { campaignUrl: 'https://www.tomsteyer.com/' },
   hilton: { campaignUrl: 'https://stevehiltonforgovernor.com/' },
   bianco: { campaignUrl: 'https://biancoforgovernor.com/' },
@@ -261,4 +261,24 @@ export const CANDIDATE_EXTRAS: Partial<Record<string, Pick<Candidate, 'campaignU
     headshotUrl:
       'https://i0.wp.com/www.zocalopublicsquare.org/wp-content/uploads/2017/02/Gayle-Garbolino-Mojica-by-Beth-Baugher-e1487381040827.jpg?fit=800%2C800&ssl=1',
   },
+  /** LA County / 91501 ballot — campaign sites and headshots (June 2026). */
+  gipson: { campaignUrl: 'https://www.mikegipson.com/' },
+  friedman: { campaignUrl: 'https://friedman.house.gov/' },
+  schultz: { campaignUrl: 'https://www.votenickschultz.com/' },
+  menjivar: { campaignUrl: 'https://www.carolinemenjivar.com/' },
+  'la-carra': { campaignUrl: 'https://www.robertolacarra.com/' },
+  luna: { campaignUrl: 'https://www.robertluna4sheriff.com/' },
+  'villaraigosa-sheriff': { campaignUrl: 'https://www.alexvillanueva.com/' },
+  white: { campaignUrl: 'https://www.andrewhiteforsheriff.com/' },
+  prang: { campaignUrl: 'https://jeffreyprang.com/' },
+  adamus: { campaignUrl: 'http://adamusforla.com/' },
+  newland: { campaignUrl: 'https://www.robnewlandforassessor.com/' },
+  valbuena: { campaignUrl: 'http://www.talforjudge.com/' },
+  'irene-lee': { campaignUrl: 'https://www.ireneleeforjudge.com/' },
+  ghobadi: { campaignUrl: 'https://mariaghobadi4judge.com/' },
+  forer: { campaignUrl: 'https://benforer4judge.com/' },
+  walgren: { campaignUrl: 'https://www.walgrenforjudge.com/' },
+  bayne: { campaignUrl: 'https://electbayneforjudge.com/' },
+  marin: { campaignUrl: 'https://www.gloriamarinforjudge.com/' },
+  dibble: { campaignUrl: 'http://www.dibbleforjudge.com/' },
 };

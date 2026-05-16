@@ -1,4 +1,26 @@
-import type { Candidate, CrossTypologyRow, Race } from '../types/ballot-types';
+import type { Candidate, CandidateHorseRacePoll, CrossTypologyRow, Race } from '../types/ballot-types';
+
+/** Emerson CA governor horserace article + spreadsheet tab Emerson publishes alongside it. */
+const EMERSON_GOV_PRIMARY_ARTICLE_URL =
+  'https://emersoncollegepolling.com/california-2026-poll-becerra-continues-to-surge-steyer-and-hilton-compete-for-second-spot/';
+const EMERSON_GOV_PRIMARY_RESULTS_SPREADSHEET_URL =
+  'https://docs.google.com/spreadsheets/d/1IUWxbO8c7fHwB9xJ-rLEtwVCPX26rxs1/edit?usp=sharing&ouid=107857247170786005927&rtpof=true&sd=true';
+
+/**
+ * First-choice horserace for this guide’s six governor candidates only (sheet also lists Thurmond, Mahan, etc.).
+ * Shares rounded from Emerson “Valid Percent” column (May 9–10, 2026 survey).
+ * `governorCandidates` below is ordered by that horserace (highest first).
+ */
+function emersonGovernorPrimaryMay2026(firstChoiceDisplay: string): CandidateHorseRacePoll {
+  return {
+    firstChoiceDisplay,
+    contestLabel: 'California governor primary',
+    pollsterCredit: 'Emerson College Polling / Inside California Politics',
+    fieldDatesLabel: 'survey May 9–10, 2026 (released May 13, 2026)',
+    sourceUrl: EMERSON_GOV_PRIMARY_ARTICLE_URL,
+    fullResultsUrl: EMERSON_GOV_PRIMARY_RESULTS_SPREADSHEET_URL,
+  };
+}
 
 function ct(
   rows: [code: CrossTypologyRow['typology'], pick: string, confidence: CrossTypologyRow['confidence'], rationale: string][],
@@ -9,7 +31,7 @@ function ct(
 const govCross = ct([
   ['PL', 'Porter', '●', 'Strongest progressive pop-credibility, anti-Big-Oil/Pharma record, Warren endorsement'],
   ['EL', 'Becerra', '●', 'Establishment-Dem ideal: 122 Trump lawsuits, HHS experience, compromise-oriented'],
-  ['DM', 'Becerra', '◐', 'Long Latino-elected-official record; some DM voters may prefer Villaraigosa for labor ties'],
+  ['DM', 'Becerra', '◐', 'Long Latino-elected-official record; some DM voters may prefer Mahan’s mayor pragmatism'],
   ['OL', 'Steyer', '◐', 'Outsider-Left tension: he IS a billionaire, but his climate record is genuinely radical'],
   ['SS', 'Mahan', '○', 'San Jose mayor pitches "back to basics" pragmatism; low-info but uncontroversial'],
   ['AR', 'Hilton', '◐', 'Less MAGA-tied than Bianco, but Trump endorsement complicates this'],
@@ -46,7 +68,7 @@ const governorCandidates: Candidate[] = [
         topic: 'Public Safety',
         position: '~ Establishment Dem; pro-prosecution background',
         comparison:
-          'Less “tough-on-crime labor mayor” than Villaraigosa/PORAC lane; closer to a cautious statewide-Dem default than a sheriff-style primary pitch.',
+          'Less “big-city mayor execution” lane than Mahan’s San José résumé; closer to a cautious statewide-Dem default than a sheriff-style primary pitch.',
       },
       {
         topic: 'Abortion',
@@ -64,7 +86,7 @@ const governorCandidates: Candidate[] = [
         topic: 'Education',
         position: '✓ Pro public-school funding',
         comparison:
-          'Standard Democratic funding pitch—less tied to Villaraigosa’s LAUSD-takeover history or charter fights than some rivals’ résumés imply.',
+          'Standard Democratic funding pitch—less tied to Mahan’s mayor-led housing streamlining narrative than some rivals’ résumés imply.',
       },
       {
         topic: 'Gaza/Israel',
@@ -82,204 +104,8 @@ const governorCandidates: Candidate[] = [
     money: 'Approximately $5M+ raised, broad union and Latino-elected-official base.',
     endorsements:
       'SEIU California (dual with Steyer), UFCW Western States Council, California Faculty Association (dual with Thurmond), CA State Council of Laborers, ILWU, multiple Latino caucuses.',
+    recentPolling: emersonGovernorPrimaryMay2026('19%'),
     notes: ['None significant.'],
-  },
-  {
-    id: 'porter',
-    photoSlug: 'porter',
-    name: 'Katie Porter',
-    party: 'D',
-    role: 'Former U.S. Representative (CA-45)',
-    bio: [
-      'Most prominent national-brand Democrat in the race. Three-term U.S. House member known for whiteboard takedowns of bank executives, Big Pharma, and oil companies. Consumer protection law professor (UC Irvine) and former bankruptcy attorney.',
-      'Lost a 2024 U.S. Senate primary, declined the Schiff-vacated seat, and pivoted to governor. Brand: fight Big Money, fight Big Oil.',
-    ],
-    scorecard: [
-      {
-        topic: 'Housing',
-        position: '✓ Pro-supply, anti-corporate-landlord',
-        comparison:
-          'Sharper anti–Big Real Estate framing than Newsom’s late-term YIMBY coalition; closer to national progressive messaging than Sacramento dealmaking.',
-      },
-      {
-        topic: 'Climate',
-        position: '✓ Strong; CalEnviroVoters endorsed',
-        comparison:
-          'Brand is less weighed down by Newsom-era oil-permit controversies; more “take on fossil money” energy than a sitting executive balancing agencies.',
-      },
-      {
-        topic: 'Public Safety',
-        position: '~ Standard Dem; supports reform plus accountability',
-        comparison:
-          'More reform-and-accountability framing than Villaraigosa’s PORAC-friendly pitch—still nowhere near GOP sheriff messaging in the same race.',
-      },
-      {
-        topic: 'Abortion',
-        position: '✓ Strong supporter; EMILYs List endorsed',
-        comparison:
-          'Indistinguishable in direction from Becerra/Steyer on access; Porter’s difference is volume of national advocacy, not a novel policy carve-out.',
-      },
-      {
-        topic: 'Immigration',
-        position: '✓ Pro-immigrant, pro-DACA',
-        comparison:
-          'Values align with Newsom-era CA; contrast is emphasis—oversight hearings and populist rhetoric vs Becerra’s litigator résumé.',
-      },
-      {
-        topic: 'Education',
-        position: '✓ Pro public school; former teacher (her mother was)',
-        comparison:
-          'Personal story contrasts with Villaraigosa’s central-office reform fights—both land pro-public-school, but from different political biographies.',
-      },
-      {
-        topic: 'Gaza/Israel',
-        position: '~ Has called for ceasefire; criticized for not being more aggressive',
-        comparison:
-          'Slightly more visible tension with conventional Dem Israel positioning than Newsom’s mostly low-drama executive line.',
-      },
-      {
-        topic: 'Trump pushback',
-        position: '✓ Outspoken; use governor powers to push back framing',
-        comparison:
-          'Same anti-Trump values as Newsom, but Porter sells confrontation through retail politics and oversight hearings—not Becerra’s AG-bench litigation habit.',
-      },
-    ],
-    money: 'Strong national small-donor base; reportedly $4–6M+ raised.',
-    endorsements:
-      'California Environmental Voters (dual with Steyer), Sen. Elizabeth Warren, EMILYs List, NUHW, Teamsters, UAW, CA Reps. Dave Min and Derek Tran.',
-    notes: ['None major. Some staff-treatment complaints from her Senate campaign.'],
-  },
-  {
-    id: 'villaraigosa',
-    photoSlug: 'villaraigosa',
-    name: 'Antonio Villaraigosa',
-    party: 'D',
-    role: 'Former Mayor of Los Angeles, former CA Assembly Speaker',
-    bio: [
-      '"Labor" candidate. LA Mayor 2005–2013, former Assembly Speaker. Ran for governor in 2018 and finished third. Strongest building-trades and law-enforcement union support of any Dem; moderate-pragmatist on public safety.',
-    ],
-    scorecard: [
-      {
-        topic: 'Housing',
-        position: '✓ Pro-supply, "build, baby, build"; some YIMBY tilt',
-        comparison:
-          'Closest to Newsom’s “build more” drumbeat among labor-heavy candidates; more developer-facing history than Porter’s anti–corporate-landlord brand.',
-      },
-      {
-        topic: 'Climate',
-        position: '~ Standard Dem; not a climate hawk',
-        comparison:
-          'Clearly to the right of Steyer/Porter on climate salience—more “jobs and power bills” mayor than decarbonization evangelist.',
-      },
-      {
-        topic: 'Public Safety',
-        position: '✓ Tough-on-crime tilt; PORAC endorsed',
-        comparison:
-          'Starkest public-safety contrast in the Democratic pack vs Porter/Becerra—closest to what swing voters remember from his mayoral era.',
-      },
-      {
-        topic: 'Abortion',
-        position: '✓ Pro-choice',
-        comparison:
-          'Same party baseline as the rest of the viable Democrats; not the axis he uses to differentiate from Becerra or Porter.',
-      },
-      {
-        topic: 'Immigration',
-        position: '✓ Pro-immigrant rights',
-        comparison:
-          'Pro-immigrant positioning like other Dems; less defined by federal litigation credentials than Becerra’s AG record.',
-      },
-      {
-        topic: 'Education',
-        position: '✓ Past LAUSD takeover; mixed reform record',
-        comparison:
-          'Unique baggage vs Porter’s classroom narrative—reform fights are the main way his education story diverges from other Dems.',
-      },
-      {
-        topic: 'Gaza/Israel',
-        position: '? Has not been vocal',
-        comparison:
-          'Lower profile on foreign-policy flashpoints than Porter; similar “don’t own the issue” posture to Becerra but from a big-city mayor lens.',
-      },
-      {
-        topic: 'Trump pushback',
-        position: '~ Standard Dem rhetoric; less prominent',
-        comparison:
-          'Weaker “national resistance” brand than Becerra’s 122 suits or Porter’s cable-ready clashes—more Sacramento/LA coalition management.',
-      },
-    ],
-    money: '$3–5M raised, heavy labor and building-trades support.',
-    endorsements:
-      'California Federation of Labor Unions (2.3M members), State Building & Construction Trades Council (450K), PORAC, Mayor Karen Bass, former Sen. Barbara Boxer.',
-    notes: [
-      'Past extramarital-affair scandal (2007) is well-documented but old; criticized for cozy developer relationships during LA mayoralty.',
-    ],
-  },
-  {
-    id: 'steyer',
-    photoSlug: 'steyer',
-    name: 'Tom Steyer',
-    party: 'D',
-    role: 'Climate activist, hedge-fund founder',
-    bio: [
-      'Self-funder. Founded Farallon Capital, then NextGen America (youth voter mobilization). 2020 presidential bid (dropped out before primaries). Has spent hundreds of millions of his own money on climate and Democratic causes—both asset and liability.',
-    ],
-    scorecard: [
-      {
-        topic: 'Housing',
-        position: '✓ Pro-supply, pro-affordability',
-        comparison:
-          'Credible affordability talk, but voters weighing “billionaire who financed housing” against Porter’s anti-corporate frame split on the same bullet.',
-      },
-      {
-        topic: 'Climate',
-        position: '✓✓ Strongest credentials in the field; defeated Prop 23, co-chaired Prop 39',
-        comparison:
-          'Only candidate whose core story is climate capital—overshadows Becerra/Porter on single-issue depth at the cost of Farallon-era skepticism from the left.',
-      },
-      {
-        topic: 'Public Safety',
-        position: '~ Standard Dem',
-        comparison:
-          'Not competing with Villaraigosa’s law-enforcement union lane or Bianco/Hilton on the right—generic Dem median on safety rhetoric.',
-      },
-      {
-        topic: 'Abortion',
-        position: '✓ Pro-choice',
-        comparison:
-          'Matches the field; Steyer’s differentiation is self-funding + climate, not reproductive policy.',
-      },
-      {
-        topic: 'Immigration',
-        position: '✓ Pro-immigrant',
-        comparison:
-          'Standard Democratic values row; less anchored in litigation biography than Becerra’s family-separation suits narrative.',
-      },
-      {
-        topic: 'Education',
-        position: '✓ Pro public school',
-        comparison:
-          'Broad-brush support—less personal contrast with Porter’s teacher-family story or Villaraigosa’s superintendent battles.',
-      },
-      {
-        topic: 'Gaza/Israel',
-        position: '? Has not made it a campaign issue',
-        comparison:
-          'Like Becerra, keeps international conflicts off the marquee; OL voters choosing Steyer are usually buying climate, not foreign policy.',
-      },
-      {
-        topic: 'Trump pushback',
-        position: '✓ Founded NextGen specifically to fight Trumpism',
-        comparison:
-          'Grassroots-mobilization story complements Becerra’s courtroom file—different toolkit than Porter’s oversight-hearing celebrity.',
-      },
-    ],
-    money: 'Substantial self-funding — dominant financial pattern. SEIU dual-endorsed Steyer + Becerra noting hedge-fund history as a question mark for some progressives.',
-    endorsements:
-      'Sierra Club, NRDC Action Fund, Center for Biological Diversity Action Fund, California Environmental Voters (dual with Porter), SEIU California (dual with Becerra), Climate Action California.',
-    notes: [
-      'Self-funding billionaire; some progressives view his Farallon era as compromising (ideological flag for left voters, not conspiratorial).',
-    ],
   },
   {
     id: 'hilton',
@@ -342,6 +168,7 @@ const governorCandidates: Candidate[] = [
     ],
     money: 'Self-funding plus Trump-aligned PAC support.',
     endorsements: 'Donald Trump. Failed to win formal CA Republican Party endorsement (as did Bianco).',
+    recentPolling: emersonGovernorPrimaryMay2026('17%'),
     redFlags: [
       {
         text: 'Polling near the top of a crowded primary without prior U.S. elected office; Donald Trump’s April 2026 endorsement and a long Fox News prime-time hosting career are central to his coalition. Independent analysts widely question whether marquee tax and utility price pledges are workable from Sacramento alone.',
@@ -352,6 +179,73 @@ const governorCandidates: Candidate[] = [
       },
     ],
     redFlagCallout: true,
+  },
+  {
+    id: 'steyer',
+    photoSlug: 'steyer',
+    name: 'Tom Steyer',
+    party: 'D',
+    role: 'Climate activist, hedge-fund founder',
+    bio: [
+      'Self-funder. Founded Farallon Capital, then NextGen America (youth voter mobilization). 2020 presidential bid (dropped out before primaries). Has spent hundreds of millions of his own money on climate and Democratic causes—both asset and liability.',
+    ],
+    scorecard: [
+      {
+        topic: 'Housing',
+        position: '✓ Pro-supply, pro-affordability',
+        comparison:
+          'Credible affordability talk, but voters weighing “billionaire who financed housing” against Porter’s anti-corporate frame split on the same bullet.',
+      },
+      {
+        topic: 'Climate',
+        position: '✓✓ Strongest credentials in the field; defeated Prop 23, co-chaired Prop 39',
+        comparison:
+          'Only candidate whose core story is climate capital—overshadows Becerra/Porter on single-issue depth at the cost of Farallon-era skepticism from the left.',
+      },
+      {
+        topic: 'Public Safety',
+        position: '~ Standard Dem',
+        comparison:
+          'Not competing with Mahan’s “safest big city” mayor branding or Bianco/Hilton on the right—generic Dem median on safety rhetoric.',
+      },
+      {
+        topic: 'Abortion',
+        position: '✓ Pro-choice',
+        comparison:
+          'Matches the field; Steyer’s differentiation is self-funding + climate, not reproductive policy.',
+      },
+      {
+        topic: 'Immigration',
+        position: '✓ Pro-immigrant',
+        comparison:
+          'Standard Democratic values row; less anchored in litigation biography than Becerra’s family-separation suits narrative.',
+      },
+      {
+        topic: 'Education',
+        position: '✓ Pro public school',
+        comparison:
+          'Broad-brush support—less Silicon Valley mayor résumé contrast than Mahan’s City Hall pitch.',
+      },
+      {
+        topic: 'Gaza/Israel',
+        position: '? Has not made it a campaign issue',
+        comparison:
+          'Like Becerra, keeps international conflicts off the marquee; OL voters choosing Steyer are usually buying climate, not foreign policy.',
+      },
+      {
+        topic: 'Trump pushback',
+        position: '✓ Founded NextGen specifically to fight Trumpism',
+        comparison:
+          'Grassroots-mobilization story complements Becerra’s courtroom file—different toolkit than Porter’s oversight-hearing celebrity.',
+      },
+    ],
+    money: 'Substantial self-funding — dominant financial pattern. SEIU dual-endorsed Steyer + Becerra noting hedge-fund history as a question mark for some progressives.',
+    endorsements:
+      'Sierra Club, NRDC Action Fund, Center for Biological Diversity Action Fund, California Environmental Voters (dual with Porter), SEIU California (dual with Becerra), Climate Action California.',
+    recentPolling: emersonGovernorPrimaryMay2026('17%'),
+    notes: [
+      'Self-funding billionaire; some progressives view his Farallon era as compromising (ideological flag for left voters, not conspiratorial).',
+    ],
   },
   {
     id: 'bianco',
@@ -414,6 +308,7 @@ const governorCandidates: Candidate[] = [
     ],
     money: 'Self-funded plus law-enforcement PAC support.',
     endorsements: 'Numerous county sheriffs and law-enforcement associations.',
+    recentPolling: emersonGovernorPrimaryMay2026('11%'),
     redFlags: [
       {
         text: 'Acknowledged paying dues to the Oath Keepers in 2014; his name appeared in leaked membership data as scrutiny of the group intensified after Jan. 6, 2021.',
@@ -431,7 +326,139 @@ const governorCandidates: Candidate[] = [
       },
     ],
     redFlagCallout: true,
+  },  {
+    id: 'porter',
+    photoSlug: 'porter',
+    name: 'Katie Porter',
+    party: 'D',
+    role: 'Former U.S. Representative (CA-45)',
+    bio: [
+      'Most prominent national-brand Democrat in the race. Three-term U.S. House member known for whiteboard takedowns of bank executives, Big Pharma, and oil companies. Consumer protection law professor (UC Irvine) and former bankruptcy attorney.',
+      'Lost a 2024 U.S. Senate primary, declined the Schiff-vacated seat, and pivoted to governor. Brand: fight Big Money, fight Big Oil.',
+    ],
+    scorecard: [
+      {
+        topic: 'Housing',
+        position: '✓ Pro-supply, anti-corporate-landlord',
+        comparison:
+          'Sharper anti–Big Real Estate framing than Newsom’s late-term YIMBY coalition; closer to national progressive messaging than Sacramento dealmaking.',
+      },
+      {
+        topic: 'Climate',
+        position: '✓ Strong; CalEnviroVoters endorsed',
+        comparison:
+          'Brand is less weighed down by Newsom-era oil-permit controversies; more “take on fossil money” energy than a sitting executive balancing agencies.',
+      },
+      {
+        topic: 'Public Safety',
+        position: '~ Standard Dem; supports reform plus accountability',
+        comparison:
+          'More reform-and-accountability framing than Mahan’s moderate mayor lane—still nowhere near GOP sheriff messaging in the same race.',
+      },
+      {
+        topic: 'Abortion',
+        position: '✓ Strong supporter; EMILYs List endorsed',
+        comparison:
+          'Indistinguishable in direction from Becerra/Steyer on access; Porter’s difference is volume of national advocacy, not a novel policy carve-out.',
+      },
+      {
+        topic: 'Immigration',
+        position: '✓ Pro-immigrant, pro-DACA',
+        comparison:
+          'Values align with Newsom-era CA; contrast is emphasis—oversight hearings and populist rhetoric vs Becerra’s litigator résumé.',
+      },
+      {
+        topic: 'Education',
+        position: '✓ Pro public school; former teacher (her mother was)',
+        comparison:
+          'Personal story contrasts with Mahan’s Teach for America → tech-founder arc—both land pro-public-school, but from different political biographies.',
+      },
+      {
+        topic: 'Gaza/Israel',
+        position: '~ Has called for ceasefire; criticized for not being more aggressive',
+        comparison:
+          'Slightly more visible tension with conventional Dem Israel positioning than Newsom’s mostly low-drama executive line.',
+      },
+      {
+        topic: 'Trump pushback',
+        position: '✓ Outspoken; use governor powers to push back framing',
+        comparison:
+          'Same anti-Trump values as Newsom, but Porter sells confrontation through retail politics and oversight hearings—not Becerra’s AG-bench litigation habit.',
+      },
+    ],
+    money: 'Strong national small-donor base; reportedly $4–6M+ raised.',
+    endorsements:
+      'California Environmental Voters (dual with Steyer), Sen. Elizabeth Warren, EMILYs List, NUHW, Teamsters, UAW, CA Reps. Dave Min and Derek Tran.',
+    recentPolling: emersonGovernorPrimaryMay2026('10%'),
+    notes: ['None major. Some staff-treatment complaints from her Senate campaign.'],
   },
+  {
+    id: 'mahan',
+    photoSlug: 'mahan',
+    name: 'Matt Mahan',
+    party: 'D',
+    role: 'Mayor of San Jose',
+    bio: [
+      'Teach for America middle-school teacher in San José; tech entrepreneur who co-founded Brigade (civic engagement). Won San José’s mayor office in 2022 after one council term; re-elected 2024.',
+      'Campaign sells “back to basics”: streamline housing approvals and fees, visible homelessness response, police staffing and safer-street optics, audits targeting fraud—running as an executor inside big-city government rather than a cable-news combatant.',
+    ],
+    scorecard: [
+      {
+        topic: 'Housing',
+        position: '✓ Pro-supply; mayor-led permitting/fee narrative',
+        comparison:
+          'Closest Newsom-era “get foundations in the ground” energy among Democrats still pitching dashboards—contrasts Porter’s anti-corporate-landlord populism.',
+      },
+      {
+        topic: 'Climate',
+        position: '~ Standard urban Dem; climate not brand centerpiece',
+        comparison:
+          'Clearly softer climate volume than Steyer/Porter; closer to mainstream mayor worried about utility bills than decarbonization evangelist.',
+      },
+      {
+        topic: 'Public Safety',
+        position: '✓ Moderate Dem; staffing/community policing pitch',
+        comparison:
+          'Mayor lane sits between Porter reform rhetoric and GOP sheriff celebrities—emphasis on measurable crime trends more than ideology.',
+      },
+      {
+        topic: 'Abortion',
+        position: '✓ Pro-choice',
+        comparison:
+          'Same statewide Democratic baseline as other viable Democrats in the primary—not where Mahan chooses differentiation.',
+      },
+      {
+        topic: 'Immigration',
+        position: '✓ Pro-immigrant city norms',
+        comparison:
+          'San José posture aligns with sanctuary-city defaults without Becerra’s courtroom celebrity or Hilton/Bianco wedge framing.',
+      },
+      {
+        topic: 'Education',
+        position: '✓ Public schools; Teach for America résumé',
+        comparison:
+          'Hands-on classroom chapter contrasts Becerra/Porter oversight rhetoric—different biography than legislative insiders.',
+      },
+      {
+        topic: 'Gaza/Israel',
+        position: '? Not a marquee campaign topic',
+        comparison:
+          'Keeps spotlight on municipal outcomes; less daylight than Porter on ceasefire-adjacent positioning.',
+      },
+      {
+        topic: 'Trump pushback',
+        position: '~ Standard Democratic mayor framing',
+        comparison:
+          'Less nationally theatrical resistance branding than Porter/Becerra litigation storyline—pitch is competent governance.',
+      },
+    ],
+    money: 'Silicon Valley donor network plus mayor-coalition bundling; still chasing better-known rivals’ totals.',
+    endorsements:
+      'Campaign promotes Colorado Gov. Jared Polis plus Bay Area mayors/supervisors and moderate Democratic validators.',
+    recentPolling: emersonGovernorPrimaryMay2026('8%'),
+    notes: ['Tech-founder wealth is real but a smaller headline than Steyer self-funding; mayor performance metrics are disputed by rivals.'],
+  },
+
 ];
 
 export const RACES_STATEWIDE: Race[] = [
@@ -445,13 +472,13 @@ export const RACES_STATEWIDE: Race[] = [
       'The winner decides whether progressive legislation moves fast or faces vetoes, how aggressively the state fights or cooperates with Washington, and whose priorities—labor, business, cities, or rural regions—carry the most weight in the country’s largest state economy.',
     ],
     introParagraphs: [
-      'Newsom is termed out. Polling at guide press showed Republicans Steve Hilton (~16%) and Chad Bianco (~14%) leading a fragmented Democratic field. CDP warned of (but did not expect) a possible top-two GOP lockout. CA Republican Party failed to officially endorse at April 2026 convention.',
+      'Newsom is termed out. Emerson College / Inside California Politics polled more governor hopefuls than we profile here (Tony Thurmond is still on the statewide ballot). Candidate cards are listed highest-to-lowest by Emerson’s published horserace Valid Percent for these six (rounded on-card); full spreadsheet breaks out everyone else. CDP warned of (but did not expect) a possible top-two GOP lockout. CA Republican Party failed to officially endorse at April 2026 convention.',
     ],
     candidates: governorCandidates,
     crossTypology: govCross,
     counterArguments: [
       'EL (Becerra ●): But consider Porter if you prioritize structural reform over experience.',
-      'DM (Becerra ◐): But consider Villaraigosa if labor / urban-Latino base is your priority.',
+      'DM (Becerra ◐): But consider Mahan if you prioritize mayor-led execution and “fix basics first” over statewide litigation credentials.',
       'OL (Steyer ◐): But consider Porter — same anti-corporate energy without a hedge-fund past.',
       'AR (Hilton ◐): But consider Becerra if "would not embarrass California" matters more than party.',
       'PR (Bianco ◐): But consider Hilton if you find Oath Keepers / ballot-seizure disqualifying.',
@@ -614,6 +641,8 @@ export const RACES_STATEWIDE: Race[] = [
         ],
         endorsements:
           'AG Bonta, Treasurer Ma, Controller Cohen, Insurance Comm. Lara, SoP Thurmond, CA Democratic Party, CA Federation of Teachers, AFSCME, SEIU, CWA, CA Nurses Association, Planned Parenthood Affiliates of CA, Mayor Todd Gloria, SD Supervisor Monica Montgomery Steppe.',
+        recordVsChange:
+          'Weber has run elections and business filings through universal vote-by-mail expansion and national attacks on California’s model. Keep her for continuity on access and mail infrastructure; Wagner is the meaningful alternative only if voter-ID tightening and national GOP “integrity” messaging outweigh those priorities.',
         notes: ['None significant.'],
       },
       {
@@ -683,6 +712,8 @@ export const RACES_STATEWIDE: Race[] = [
         bio: ['State Controller since 2023. Former SF Supervisor, former BoE chair.'],
         endorsements:
           'Newsom, Lt. Gov. Kounalakis, SoS Weber, Sen. Schiff, Speaker Rivas, CA Labor Federation, CPF, CNA, multiple Teamsters/IBEW locals, Equality California, CA Council for Affordable Housing.',
+        recordVsChange:
+          'Cohen is the sitting Controller with the Legislature’s typical labor-D coalition on audits and fiscal oversight. Morgan is the Republican alternative if you want sharper skepticism of Sacramento spending; Adams is a symbolic left protest without a path to hold the office.',
         redFlags: [],
       },
       {
@@ -852,6 +883,8 @@ export const RACES_STATEWIDE: Race[] = [
           },
         ],
         endorsements: 'Broad Democratic establishment, labor, and civil-rights coalition.',
+        recordVsChange:
+          'Bonta turned the AG’s office into a high-profile litigator on Trump-era policies, consumer fraud, environmental enforcement, and progressive criminal-justice themes. Gates is the viable Republican prosecutor contrast—worth turnover only if you want less marquee multistate litigation and a harder “law and order” posture than Bonta’s institutional reform lane.',
         redFlags: [],
       },
       {
